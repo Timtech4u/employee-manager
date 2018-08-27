@@ -33,16 +33,37 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+SHARED_APPS = (
+    'tenant_schemas',  # mandatory, should always be before any django app
+    'customers', # you must list the app where your tenant model resides in
+
+    'django.contrib.contenttypes',
+)
+
+TENANT_APPS = (
+    'django.contrib.contenttypes',
+    'django.contrib.auth',
+
+    # your tenant-specific apps
+    'app',
+)
+
+TENANT_MODEL = "customers.Client" # app.Model
+
 INSTALLED_APPS = [
+    'tenant_schemas',  # mandatory, should always be before any django app
+    'customers',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',   
     'app',
     'django_nose',
 ]
+
+DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,7 +73,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'tenant_schemas.middleware.TenantMiddleware',
 ]
+
+DATABASE_ROUTERS = (
+    'tenant_schemas.routers.TenantSyncRouter',
+)
 
 ROOT_URLCONF = 'vuedj.urls'
 
