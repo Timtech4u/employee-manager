@@ -50,7 +50,11 @@ SHARED_APPS = (
     'tenant_schemas',  # mandatory, should always be before any django app
     'customers', # you must list the app where your tenant model resides in
 
+    'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 )
 
 TENANT_APPS = (
