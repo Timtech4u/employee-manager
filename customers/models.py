@@ -6,3 +6,6 @@ class Client(TenantMixin):
     paid_until = models.DateField()
     on_trial = models.BooleanField()
     created_on = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
