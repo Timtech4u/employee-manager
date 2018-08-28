@@ -86,6 +86,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'tenant_schemas.middleware.TenantMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 DATABASE_ROUTERS = (
