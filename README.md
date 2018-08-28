@@ -1,6 +1,6 @@
 # my-sass-app
 
-> A Django2.X/Vuejs2.X SASS App
+> A Django2.X/Vuejs2.X SASS App 
 
 ## Build Setup
 
