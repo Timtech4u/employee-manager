@@ -15,7 +15,7 @@ python manage.py collectstatic --noinput
 echo 'Done...'
 
 echo 'Run migrations'
-python manage.py migrate
+python manage.py migrate_schemas --shared
 echo 'Done...'
 
 export PORT=8000

@@ -4,4 +4,4 @@ from .models import Profile
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('user', 'bio', 'location', 'birth-date')
+        fields = '__all__'

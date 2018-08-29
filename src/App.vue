@@ -5,7 +5,7 @@
     <img class="logo" src="./assets/dj.png">
     <router-view/>
     <p>
-      Welcome to your Django - Vue.js app!
+      You are on - <b>{{hostname}}</b>
     </p>
   </div>
 </template>
@@ -13,6 +13,11 @@
 <script>
 export default {
   name: 'app',
+  data(){
+    return {
+      hostname: location.host
+    }
+  }
 };
 </script>
 
