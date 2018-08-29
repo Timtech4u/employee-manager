@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from app.views import index
-
+from app.views import index, ProfileList
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='home'),
+    url(r'^api/profiles/$', ProfileList.as_view()),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)

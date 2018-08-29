@@ -55,13 +55,13 @@ SHARED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin'
+    'django.contrib.admin',
 )
 
 TENANT_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.auth',
-
+    'rest_framework',
     # your tenant-specific apps
     'app',
 )
@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',   
     'app',
     'django_nose',
+    'rest_framework',
 ]
 
 DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
