@@ -4,7 +4,14 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+class Document(models.Model):
+    description = models.CharField(max_length=200, blank=True, null=True)
+    document = models.FileField(upload_to='documents/', blank=True, null=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
 class Profile(models.Model):
+    passport = models.ImageField(upload_to='passports/', blank=True, null=True)
+    documents = models.ForeignKey(Document, on_delete=models.CASCADE, related_name='documents', blank=True, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)

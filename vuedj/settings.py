@@ -64,6 +64,7 @@ TENANT_APPS = (
     'rest_framework',
     # your tenant-specific apps
     'app',
+    'import_export'
 )
 
 TENANT_MODEL = "customers.Client" # app.Model
@@ -78,6 +79,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',   
     'app',
+    'import_export',
     'django_nose',
     'rest_framework',
 ]
@@ -113,6 +115,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -166,6 +169,9 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/staticfiles/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Use nose to run all tests
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
