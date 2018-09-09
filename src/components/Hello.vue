@@ -37,7 +37,4 @@ export default {
 h1 {
   color: #42b983;
 }
-.jobs {
-  margin: auto;
-}
 </style>
