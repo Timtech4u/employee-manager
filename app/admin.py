@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Document
+from .models import Profile, Document, Organization
 from customers.models import Client
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
@@ -19,9 +19,12 @@ class CustomUserAdmin(UserAdmin):
             return list()
         return super(CustomUserAdmin, self).get_inline_instances(request, obj)
 
+
 # Allowing Us to Edit User Profile
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 
 admin.site.register(Document)
 admin.site.register(Client)
+
+admin.site.register(Organization)

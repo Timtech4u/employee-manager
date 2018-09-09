@@ -4,6 +4,17 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+class Organization(models.Model):
+    name = models.CharField(max_length=200)
+    website = models.URLField(blank=True, null=True)
+    contact = models.CharField(max_length=20, blank=True, null=True)
+    location = models.CharField(max_length=50, blank=True, null=True)
+    email = models.EmailField()
+    
+
+    def __str__(self):
+        return self.name
+
 class Department(models.Model):
     name = models.CharField(max_length=200)
 
@@ -11,7 +22,6 @@ class Department(models.Model):
         return self.name
 
 class Designation(models.Model):
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
 
     def __str__(self):
@@ -22,6 +32,9 @@ class Document(models.Model):
     document = models.FileField(upload_to='documents/', blank=True, null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.description
+
 class Profile(models.Model):
     passport = models.ImageField(upload_to='passports/', blank=True, null=True)
     documents = models.ForeignKey(Document, on_delete=models.CASCADE, related_name='documents', blank=True, null=True)
@@ -31,8 +44,11 @@ class Profile(models.Model):
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
 
-def __str__(self):
-    return self.user.username
+    def __str__(self):
+        return self.user.username
+
+class Job(models.Model):
+    pass
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
