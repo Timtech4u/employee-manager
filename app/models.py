@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 class Organization(models.Model):
+    logo = models.ImageField(upload_to='logo/', blank=True, null=True)
     name = models.CharField(max_length=200)
     website = models.URLField(blank=True, null=True)
     contact = models.CharField(max_length=20, blank=True, null=True)

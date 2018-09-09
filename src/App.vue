@@ -1,10 +1,13 @@
 <template>
   <div id="app">
-    <img class="logo" src="./assets/logo.png">
-    <br>
-    <img class="logo" src="./assets/dj.png">
+    <div>
+    <h1> {{org.name}} </h1>
+    <p> {{org.email}} | {{org.contact}} </p>
+    <p> {{org.website}} | {{org.location}} </p>
+    <hr>
+    </div>
     <router-view/>
-    <p>
+    <p class="footer">
       You are on - <b>{{hostname}}</b>
     </p>
   </div>
@@ -15,8 +18,17 @@ export default {
   name: 'app',
   data(){
     return {
-      hostname: location.host
+      hostname: location.host,
+      org: null
     }
+  },
+  mounted(){
+    let url = `http://${this.hostname}/api/organization/`
+    console.log(url)
+    fetch(url)
+    .then((resp) => resp.json()) // Transform the data into json
+    .then((data) => this.org = data[0]
+    )
   }
 };
 </script>

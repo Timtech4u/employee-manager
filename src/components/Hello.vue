@@ -1,14 +1,6 @@
 <template>
   <div class="hello">
-    <h1>Here are the Profiles on your domain:</h1>
-    <div v-for="profile in profiles" :key="profile.id">
-    <hr>
-    <p> Profile ID: {{profile.id}} </p>
-    <p> User ID: {{profile.user}} </p>
-    <p> Birthdate: {{profile.birth_date}} </p>
-    <p> Location: {{profile.location}} </p>
-    <p> Bio: {{profile.bio}} </p>
-    </div>
+    <h3 class="jobs">Available Jobs!</h3>
   </div>
 </template>
 
@@ -44,5 +36,8 @@ export default {
 <style scoped>
 h1 {
   color: #42b983;
+}
+.jobs {
+  margin: auto;
 }
 </style>
