@@ -62,7 +62,8 @@ TENANT_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'rest_framework',
-    # your tenant-specific apps
+    'rest_framework.authtoken',
+    'rest_auth',
     'app',
     'import_export'
 )
@@ -82,6 +83,8 @@ INSTALLED_APPS = [
     'import_export',
     'django_nose',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth'
 ]
 
 DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'

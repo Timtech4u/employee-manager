@@ -16,8 +16,9 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import url
 from django.contrib import admin
-from app.views import index, ProfileList, Organization
+from app.views import index, ProfileList, Organization, Job, Candidate
 from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework.documentation import include_docs_urls
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -25,8 +26,11 @@ urlpatterns = [
     url(r'^$', index, name='home'),
     url(r'^api/profiles/$', ProfileList.as_view()),
     url(r'^api/organization/$', Organization.as_view()),
+    url(r'^api/jobs/$', Job.as_view()),
+    url(r'^api/candidates/$', Candidate.as_view()),
+    url(r'^docs/', include_docs_urls(title='API docs'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns = format_suffix_patterns(urlpatterns)
 
-admin.site.site_header = 'My Employee Manager'
+admin.site.site_header = 'Job Application Portal'

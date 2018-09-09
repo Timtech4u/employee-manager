@@ -1,6 +1,25 @@
 <template>
   <div class="hello">
     <h3 class="jobs">Available Jobs!</h3>
+    <div class="columns">
+      <div class="card column" v-for="job in jobs" :key="job.id">
+        <div class="card-content">
+          <p class="title">
+            {{job.title}}
+          </p>
+          <p class="subtitle">
+            {{job.department}}
+          </p>
+        </div>
+        <footer class="card-footer">
+          <p class="card-footer-item">
+            <span>
+              Apply Now
+            </span>
+          </p>
+        </footer>
+      </div>  
+    </div>
   </div>
 </template>
 
@@ -13,20 +32,14 @@ export default {
       // preserves its current state and we are modifying
       // its initial state.
       hostname: location.host,
-      results: null
-    }
-  },
-  computed: {
-    profiles() {
-      return this.results
+      jobs: null
     }
   },
   mounted(){
-    let url = `http://${this.hostname}/api/profiles/`
-    console.log(url)
+    let url = `http://${this.hostname}/api/jobs/`
     fetch(url)
     .then((resp) => resp.json()) // Transform the data into json
-    .then((data) => this.results = data
+    .then((data) => this.jobs = data
     )
   }
 }

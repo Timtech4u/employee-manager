@@ -39,7 +39,7 @@ class Document(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.description
+        return str(self.description)
 
 class Profile(models.Model):
     passport = models.ImageField(upload_to='passports/', blank=True, null=True)
@@ -53,7 +53,7 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-class JobStatus(models.Model):
+class JobType(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
@@ -63,18 +63,28 @@ class Job(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     required_skills = models.TextField(blank=True, null=True)
-    designation = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
+    designation = models.ForeignKey(Designation, on_delete=models.SET_NULL, null=True)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
     date_posted = models.DateTimeField(auto_now_add=True)
     due_date = models.DateTimeField()
     nummber_of_position = models.IntegerField(blank=True, null=True)
     required_qualification = models.TextField(blank=True, null=True)
     required_years_experience = models.IntegerField(blank=True, null=True)
-    employment_status = models.ForeignKey(JobStatus, blank=True, null=True, on_delete=models.SET_NULL)
+    job_type = models.ForeignKey(JobType, blank=True, null=True, on_delete=models.SET_NULL)
     available = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
+
+class Candidate(models.Model):
+    job = models.ForeignKey(Job,  on_delete=models.SET_NULL, null=True)
+    applicant = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
+    resume = models.ForeignKey(Document, on_delete=models.SET_NULL, null=True, blank=True, related_name='resumes')
+    cover_letter = models.ForeignKey(Document, on_delete=models.SET_NULL, null=True, blank=True, related_name='cover_letters')
+    date_applied = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.applicant.user.username
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

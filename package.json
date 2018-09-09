@@ -11,6 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "bulma": "^0.7.1",
     "element-ui": "^2.4.6",
     "vue": "^2.5.2",
     "vue-data-tables": "^3.4.2",
