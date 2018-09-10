@@ -1,24 +1,22 @@
 <template>
   <div class="hello">
     <h3 class="jobs">Available Jobs!</h3>
-    <div class="columns">
-      <div class="card column" v-for="job in jobs" :key="job.id">
-        <div class="card-content">
-          <p class="title">
-            {{job.title}}
-          </p>
-          <p class="subtitle">
-            {{job.department}}
-          </p>
-        </div>
-        <footer class="card-footer">
-          <p class="card-footer-item">
-            <span>
-              Apply Now
-            </span>
-          </p>
-        </footer>
-      </div>  
+    <div class="columns" v-for="job in jobs" :key="job.id">
+      <div class="box">
+        <article class="media">
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>{{job.title}}</strong> <small>Date Posted:</small> <small>{{job.date_posted}}</small>
+                <br>
+                    {{job.description}}
+              </p>
+            </div>
+            <div> <a href="#"> Apply Now </a></div>
+          </div>
+        </article>
+      </div>
+      <br>
     </div>
   </div>
 </template>
