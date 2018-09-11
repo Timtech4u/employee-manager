@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div>
+    <h3> Organization </h3>
     <h1> {{org.name}} </h1>
     <p> {{org.email}} | {{org.contact}} </p>
     <p> {{org.website}} | {{org.location}} </p>

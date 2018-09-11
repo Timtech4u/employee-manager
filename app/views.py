@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Profile, Organization, Job, Candidate
-from .serializers import ProfileSerializer, OrganizationSerializer, JobSerializers, CandidateSerializers
+from customers.models import Client
+from .serializers import ProfileSerializer, OrganizationSerializer, JobSerializers, CandidateSerializers, ClientSerializers
 from rest_framework import generics
 
 # Create your views here.
@@ -39,3 +40,15 @@ class Candidate(generics.ListCreateAPIView):
     """
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializers
+
+class Candidate(generics.ListCreateAPIView):
+    """
+    get:
+    Return a list of all the existing clients (tenants).
+
+    post:
+    Create a new client(tenant) instance.
+    """
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializers
+    

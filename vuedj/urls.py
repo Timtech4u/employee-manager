@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^api/organization/$', Organization.as_view()),
     url(r'^api/jobs/$', Job.as_view()),
     url(r'^api/candidates/$', Candidate.as_view()),
+    url(r'^api/clients/$', Candidate.as_view()),
     url(r'^docs/', include_docs_urls(title='API docs'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
