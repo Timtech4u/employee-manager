@@ -7,7 +7,7 @@
     <p> Client API Endpoints: <a :href="'http://'+client.domain_url+'/docs/'"> http://{{client.domain_url}}/docs/ </a> </p> 
     <p> Admin URL: <a :href="'http://'+client.domain_url+'/admin'"> http://{{client.domain_url}}/admin </a> </p> 
     <p> Admin Username: {{client.schema_name}} </p> 
-    <p> Admin Default Password: Ask the teanant you're on for this </p>
+    <p> Admin Default Password: Ask the tenant you're on for this </p>
     <hr>
   </div>
 </div>
