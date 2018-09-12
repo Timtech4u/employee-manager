@@ -2,10 +2,12 @@
   <div id="app">
     <div>
     <h3> Tenant Organization Profile </h3>
-    <h1> {{org.name}} </h1>
-    <p> Email: {{org.email}} | Phone: {{org.contact}} </p>
-    <p> Website: {{org.website}} | Location: {{org.location}} </p>
-    <p> Tenant Domain URL: {{hostname}} </p>
+    <h1 v-if="org.name"> Name: {{org.name}} </h1>
+    <p v-if="org.email"> Email: {{org.email}} </p>
+    <p v-if="org.contact"> Phone: {{org.contact}} </p>
+    <p v-if="org.website"> Website: {{org.website}} </p>
+    <p v-if="org.contact"> Location: {{org.location}} </p>
+    <p > Tenant Domain URL: <a href="{{hostname}}"> {{hostname}} </a> </p>
     <hr>
     </div>
     <router-view/>

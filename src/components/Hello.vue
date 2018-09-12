@@ -1,14 +1,16 @@
 <template>
 <div>
-  <h3>Other Tenants on this Instance </h3>
+  <h3>List of Other Tenants on this Instance: </h3>
   <div v-for="client in clients" :key="client.id">
     <p> Client name: {{client.name}} </p> 
     <p> Client schema: {{client.schema_name}} </p> 
-    <p> Admin URL: http://{{client.domain_url}}/admin </p> 
+    <p> Client API Endpoints: <a href="http://{{client.domain_url}}/docs/"> http://{{client.domain_url}}/docs/ </a> </p> 
+    <p> Admin URL: <a href="http://{{client.domain_url}}/admin"> http://{{client.domain_url}}/admin </a> </p> 
     <p> Admin Username: {{client.schema_name}} </p> 
     <p> Admin Default Password: Ask the teanant you're on for this </p>
-    <br>
+    <hr>
   </div>
+  <pre> This is still work in progress, alot has been done on the backend, feel free to contribute <a href="https://github.com/Timtech4u/employee-manager"> here </a></pre>
 </div>
 </template>
 

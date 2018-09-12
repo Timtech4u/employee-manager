@@ -21,3 +21,9 @@ npm run build --report
 # deploy
 .deploy.sh
 ```
+
+## Contribute Guidelines
+
+- Clone this Repo
+- Punch in come codes
+- Open a PR
