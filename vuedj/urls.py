@@ -34,4 +34,4 @@ urlpatterns = [
 
 urlpatterns = format_suffix_patterns(urlpatterns)
 
-admin.site.site_header = 'Job Application Portal'
+admin.site.site_header = 'Employee Manager & Job Application Portal'
