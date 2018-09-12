@@ -1,14 +1,14 @@
 <template>
 <div>
-  <h3> Tenants </h3>
-  <p v-for="client in clients" :key="client.id">
-    <span> Client name: {{client.name}} </span> | 
-    <span> Client schema: {{client.schema_name}} </span> |
-    <span> Admin URL: http://{{domain_url}}/admin </span> |
-    <span> Admin Username: {{client.schema_name}} </span> |
-    <span> Admin Password: Ask the teanant you're on for this </span>
+  <h3>Other Tenants on this Instance </h3>
+  <div v-for="client in clients" :key="client.id">
+    <p> Client name: {{client.name}} </p> 
+    <p> Client schema: {{client.schema_name}} </p> 
+    <p> Admin URL: http://{{client.domain_url}}/admin </p> 
+    <p> Admin Username: {{client.schema_name}} </p> 
+    <p> Admin Default Password: Ask the teanant you're on for this </p>
     <br>
-  </p>
+  </div>
 </div>
 </template>
 

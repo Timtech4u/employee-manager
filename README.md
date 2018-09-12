@@ -1,4 +1,5 @@
 # my-sass-app
+SaaS App for my PyConNG [Talk](http://bit.ly/django-multitenant)
 
 > A Django2.X/Vuejs2.X SASS App 
 
@@ -20,5 +21,3 @@ npm run build --report
 # deploy
 .deploy.sh
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
