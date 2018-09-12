@@ -24,6 +24,6 @@ npm run build --report
 
 ## Contribute Guidelines
 
-- Clone this Repo
+- Clone this Repo & Create a branch
 - Punch in come codes
 - Open a PR
