@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Document, Organization, Department, Designation, JobType, Job, Candidate
+from .models import Employee, Profile, Document, Organization, Department, Designation, JobType, Job, Candidate
 from customers.models import Client
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
@@ -19,6 +19,12 @@ class CustomUserAdmin(UserAdmin):
             return list()
         return super(CustomUserAdmin, self).get_inline_instances(request, obj)
 
+@admin.register(Employee)
+class EmployeeAdmin(admin.ModelAdmin):
+    date_hierarchy = 'date_joined'
+    search_fields = ['employee_id', 'profile__user__first_name', 'profile__user__last_name', 'work_email', 'profile__user__email' ]
+    list_display = ('employee_id', 'profile__user__first_name', 'profile__user__last_name')
+    list_filter = ('department', 'designation', 'employment_type')
 
 # Allowing Us to Edit User Profile
 admin.site.unregister(User)

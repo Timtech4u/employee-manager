@@ -1,13 +1,15 @@
 <template>
 <div>
   <h3>List of Other Tenants on this Instance: </h3>
+  <pre> <b> We Intend to change this to the list of available Jobs later </b> </pre>
   <div v-for="client in clients" :key="client.id">
     <p> Client name: {{client.name}} </p> 
     <p> Client schema: {{client.schema_name}} </p> 
     <p> Client API Endpoints: <a :href="'http://'+client.domain_url+'/docs/'"> http://{{client.domain_url}}/docs/ </a> </p> 
-    <p> Admin URL: <a :href="'http://'+client.domain_url+'/admin'"> http://{{client.domain_url}}/admin </a> </p> 
+    <p> Admin URL: <a :href="'http://'+client.domain_url"> http://{{client.domain_url}} </a> </p> 
     <p> Admin Username: {{client.schema_name}} </p> 
     <p> Admin Default Password: Ask the tenant you're on for this </p>
+    <p> Client API Endpoints: <a :href="'http://'+client.domain_url+'/jobs/'"> http://{{client.domain_url}}/jobs/ </a> </p> 
     <hr>
   </div>
 </div>
