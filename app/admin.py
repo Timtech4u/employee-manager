@@ -22,9 +22,18 @@ class CustomUserAdmin(UserAdmin):
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
     date_hierarchy = 'date_joined'
-    search_fields = ['employee_id', 'profile__user__first_name', 'profile__user__last_name', 'work_email', 'profile__user__email' ]
-    list_display = ('employee_id', 'profile__user__first_name', 'profile__user__last_name')
-    list_filter = ('department', 'designation', 'employment_type')
+    search_fields = ['employee_id', 'get_firstname', 'get_lastname', 'work_email', 'get_email' ]
+    list_display = ('employee_id', 'get_firstname', 'get_lastname')
+    list_filter = ('department', 'designation', 'employment_type__name', 'date_joined',)
+
+    def get_firstname(self, obj):
+        return obj.profile.user.first_name
+
+    def get_lastname(self, obj):
+        return obj.profile.user.last_name
+
+    def get_email(self, obj):
+        return obj.profile.user.get_email
 
 # Allowing Us to Edit User Profile
 admin.site.unregister(User)

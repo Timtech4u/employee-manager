@@ -22,8 +22,8 @@ from rest_framework.documentation import include_docs_urls
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^$', admin.site.urls),
-    url(r'^/jobs/$', index, name='home'),
+    url(r'^', admin.site.urls),
+    url(r'^jobs/$', index, name='home'),
     url(r'^api/profiles/$', ProfileList.as_view()),
     url(r'^api/organization/$', Organization.as_view()),
     url(r'^api/jobs/$', Job.as_view()),

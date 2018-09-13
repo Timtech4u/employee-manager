@@ -88,14 +88,15 @@ class Candidate(models.Model):
 
 class Employee(models.Model):
     employee_id = models.CharField(max_length=20, null=True, blank=True)
-    profile = models.ForeignKey(Profile, on_delete=models.SET_NULL)
+    profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
     documents = models.ForeignKey(Document, on_delete=models.SET_NULL, null=True)
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
     designation = models.ForeignKey(Designation, on_delete=models.SET_NULL, null=True)
     salary = models.IntegerField(null=True, blank=True)
     date_joined = models.DateTimeField(null=True, blank=True)
     work_phone = models.IntegerField(null=True, blank=True)
     work_email = models.EmailField(null=True, blank=True)
-    emploment_type = models.ForeignKey(JobType, on_delete=models.SET_NULL, null=True)
+    employment_type = models.ForeignKey(JobType, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.profile

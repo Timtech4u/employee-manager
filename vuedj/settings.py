@@ -67,6 +67,7 @@ TENANT_APPS = (
     'app',
     'import_export',
     'admin_interface',
+    'colorfield',
 )
 
 TENANT_MODEL = "customers.Client" # app.Model
@@ -74,7 +75,6 @@ TENANT_MODEL = "customers.Client" # app.Model
 INSTALLED_APPS = [
     'tenant_schemas',  # mandatory, should always be before any django app
     'customers',
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -83,6 +83,8 @@ INSTALLED_APPS = [
     'app',
     'import_export',
     'admin_interface',
+    'colorfield',
+    'django.contrib.admin',
     'django_nose',
     'rest_framework',
     'rest_framework.authtoken',
