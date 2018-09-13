@@ -49,12 +49,14 @@ ALLOWED_HOSTS = ['*']
 SHARED_APPS = (
     'tenant_schemas',  # mandatory, should always be before any django app
     'customers', # you must list the app where your tenant model resides in
-
+    'import_export'
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'admin_interface',
+    'colorfield',
     'django.contrib.admin',
 )
 
@@ -65,9 +67,6 @@ TENANT_APPS = (
     'rest_framework.authtoken',
     'rest_auth',
     'app',
-    'import_export',
-    'admin_interface',
-    'colorfield',
 )
 
 TENANT_MODEL = "customers.Client" # app.Model
