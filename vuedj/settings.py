@@ -67,6 +67,8 @@ TENANT_APPS = (
     'rest_framework.authtoken',
     'rest_auth',
     'app',
+    'admin_interface',
+    'colorfield',
 )
 
 TENANT_MODEL = "customers.Client" # app.Model
