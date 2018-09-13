@@ -99,7 +99,7 @@ class Employee(models.Model):
     employment_type = models.ForeignKey(JobType, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return self.profile
+        return self.profile.user.username
 
 
 @receiver(post_save, sender=User)
