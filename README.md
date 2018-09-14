@@ -1,7 +1,7 @@
 # Employee Manager App
 SaaS App for my PyConNG [Talk](http://bit.ly/django-multitenant)
 
-![alt text](Emp_.jpg)
+![screenshot](employee-manager/Emp_.PNG)
 
 > A Django2.X/Vuejs2.X SASS App 
 
