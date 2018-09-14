@@ -1,4 +1,4 @@
-# my-sass-app
+# Employee Manager App
 SaaS App for my PyConNG [Talk](http://bit.ly/django-multitenant)
 
 > A Django2.X/Vuejs2.X SASS App 
