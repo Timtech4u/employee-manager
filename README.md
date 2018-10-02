@@ -34,3 +34,8 @@ npm run build --report
 - Clone this Repo & Create a branch
 - Punch in come codes
 - Open a PR
+
+## Want a Quick Access/Demo:
+- Send a mail to hello@myemp.site
+- Indicate your desired subd-domain
+- If you have a custom domain, that's fine, Create a *CNAME* record that points to *wildcard.myemp.site.herokudns.com.*
