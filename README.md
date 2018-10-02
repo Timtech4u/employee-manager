@@ -1,5 +1,12 @@
-# my-sass-app
+# A SaaS Application for Employee Management
 SaaS App for my PyConNG [Talk](http://bit.ly/django-multitenant)
+
+## API Endpoints
+
+- `/` -> Admin panel for Employee Management
+- `/jobs` -> List of jobs (WIP)
+- `/docs` -> List of available API (`/api`) Endpoints & documentation
+
 
 > A Django2.X/Vuejs2.X SASS App 
 
