@@ -65,8 +65,6 @@ TENANT_APPS = (
     'rest_framework.authtoken',
     'rest_auth',
     'app',
-    'admin_interface',
-    'colorfield',
 )
 
 TENANT_MODEL = "customers.Client" # app.Model
@@ -81,8 +79,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',   
     'app',
     'import_export',
-    'admin_interface',
-    'colorfield',
     'django.contrib.admin',
     'django_nose',
     'rest_framework',
