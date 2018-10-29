@@ -10,6 +10,10 @@ echo 'Install python modules'
 pip install -r requirements.txt
 echo 'Done...'
 
+echo 'Install Django Admin Theme'
+python manage.py loaddata admin_interface_theme_django.json
+echo 'Done...'
+
 echo 'Collect static'
 python manage.py collectstatic --noinput
 echo 'Done...'
