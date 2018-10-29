@@ -10,7 +10,30 @@ SaaS App for my PyConNG [Talk](http://bit.ly/django-multitenant)
 
 > A Django2.X/Vuejs2.X SASS App 
 
-## Build Setup
+## Run BackEnd(Django Multitenant)
+
+``` bash
+# install dependencies, builds frontend, runs backend server
+deploy.sh
+
+# To setup a tenants (Public tenant and Others...)
+python manage.py shell
+> from customers.models import Client
+> tenant1 = Client(domain_url='127.0.0.1',
+  schema_name='public',
+  name='Default',
+  paid_until='2099-12-31',
+  on_trial=False)
+> tenant1.save()
+> tenant2 = Client(domain_url='localhost',
+  schema_name='client',
+  name='Default',
+  paid_until='2099-12-31',
+  on_trial=False)
+> tenant2.save()
+```
+
+## Run FrontEnd (VueJS)
 
 ``` bash
 # install dependencies
@@ -22,11 +45,6 @@ npm run dev
 # build for production with minification
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# deploy
-.deploy.sh
 ```
 
 ## Contribute Guidelines
