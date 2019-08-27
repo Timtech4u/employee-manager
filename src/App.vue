@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div>
-    <pre> This is still work in progress, alot has been done on the backend, feel free to contribute <a href="https://github.com/Timtech4u/employee-manager"> here </a></pre>
+    <pre> This work is still in progress, alot has been done on the backend, feel free to contribute <a href="https://github.com/Timtech4u/employee-manager"> here </a></pre>
     <h3> Tenant Organization Profile </h3>
     <h1 v-if="org.name"> Name: {{org.name}} </h1>
     <p v-if="org.email"> Email: {{org.email}} </p>
