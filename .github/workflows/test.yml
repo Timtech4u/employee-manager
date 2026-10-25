@@ -1,0 +1,41 @@
+name: Tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: employee_test
+          POSTGRES_PASSWORD: test-only
+          POSTGRES_DB: employee_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready --health-interval 10s
+          --health-timeout 5s --health-retries 5
+    env:
+      SECRET_KEY: ci-only-not-a-production-key
+      DATABASE_URL: postgres://employee_test:test-only@localhost:5432/employee_test
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.11'
+          cache: pip
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pip check
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - run: python manage.py collectstatic --noinput
+      - run: python manage.py makemigrations --check --dry-run
+      - run: coverage run --source=app,customers manage.py test --noinput
+      - run: pip-audit -r requirements.txt --no-deps --disable-pip
+      - run: npm audit
+      - run: docker build -t employee-manager:test .

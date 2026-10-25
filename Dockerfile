@@ -1,27 +1,18 @@
-FROM node:alpine
-MAINTAINER Stanley Ndagi "ndagis@gmail.com"
-RUN apk update && apk upgrade
-
+FROM node:24-bookworm-slim AS frontend
 WORKDIR /app
-
-# Install python, pip and python packages
-RUN apk add python3 curl
-COPY requirements.txt requirements.txt
-RUN curl https://bootstrap.pypa.io/get-pip.py | python3 \
-  && rm -rf /var/cache/apk/* \
-  && pip3 install --upgrade pip \
-  && pip3 install -r requirements.txt
-
-# Run the following commands for deployment
-COPY package.json package.json
-RUN npm set progress=false && npm install -s --no-progress
+COPY package.json package-lock.json ./
+RUN npm ci
 COPY . .
 RUN npm run build
-RUN python3 format_index_html.py
-RUN python3 manage.py collectstatic --noinput
 
-# EXPOSE port to be used
+FROM python:3.11.16-slim-bookworm
+WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+COPY --from=frontend /app/static-vuedj/ ./static-vuedj/
+COPY --from=frontend /app/templates/index.html ./templates/index.html
+RUN SECRET_KEY=build-only DATABASE_URL=postgresql://localhost/build python manage.py collectstatic --noinput
 EXPOSE 8000
-
-# Set command to run as soon as container is up
-CMD python3 manage.py runserver 0.0.0.0:8000
+CMD ["gunicorn", "vuedj.wsgi:application", "--bind", "0.0.0.0:8000", "--access-logfile", "-"]
