@@ -61,9 +61,9 @@ SHARED_APPS = (
 TENANT_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.auth',
+    'drf_spectacular',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth',
     'app',
 )
 
@@ -80,24 +80,30 @@ INSTALLED_APPS = [
     'app',
     'import_export',
     'django.contrib.admin',
-    'django_nose',
+    'drf_spectacular',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth'
 ]
 
-DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+STORAGES = {
+    'default': {'BACKEND': 'tenant_schemas.storage.TenantFileSystemStorage'},
+    'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'},
+}
+REST_FRAMEWORK = {'DEFAULT_SCHEMA_CLASS': 'app.schema.ModelAutoSchema'}
+SPECTACULAR_SETTINGS = {'TITLE': 'Employee Manager API', 'VERSION': '1.0.0'}
 
 MIDDLEWARE = [
+    'tenant_schemas.middleware.TenantMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'tenant_schemas.middleware.TenantMiddleware',
-    'tenant_schemas.middleware.SuspiciousTenantMiddleware'
 ]
 
 DATABASE_ROUTERS = (
@@ -154,15 +160,11 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static-vuedj'),
@@ -174,12 +176,3 @@ STATIC_URL = '/staticfiles/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# Use nose to run all tests
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-# Tell nose to measure coverage on the apps
-NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package=app',  # For multiple apps use '--cover-package=foo, bar'
-]

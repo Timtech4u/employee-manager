@@ -1,0 +1,11 @@
+Django>=5.2,<5.3
+Pillow>=13.0.0
+dj-database-url
+django-import-export
+django-tenant-schemas
+djangorestframework
+drf-spectacular
+gunicorn
+psycopg2-binary
+python-decouple
+whitenoise

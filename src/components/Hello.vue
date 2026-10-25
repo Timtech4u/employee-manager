@@ -1,42 +1,40 @@
 <template>
-<div>
-  <h3>List of Other Tenants on this Instance: </h3>
-  <pre> <b> We Intend to change this to the list of available Jobs later </b> </pre>
-  <div v-for="client in clients" :key="client.id">
-    <p> Client name: {{client.name}} </p> 
-    <p> Client schema: {{client.schema_name}} </p> 
-    <p> Client API Endpoints: <a :href="'http://'+client.domain_url+'/docs/'"> http://{{client.domain_url}}/docs/ </a> </p> 
-    <p> Admin URL: <a :href="'http://'+client.domain_url"> http://{{client.domain_url}} </a> </p> 
-    <p> Admin Username: {{client.schema_name}} </p> 
-    <p> Admin Default Password: Ask the tenant you're on for this </p>
-    <p> Client API Endpoints: <a :href="'http://'+client.domain_url+'/jobs/'"> http://{{client.domain_url}}/jobs/ </a> </p> 
-    <hr>
+  <div>
+    <h3>List of Other Tenants on this Instance:</h3>
+    <pre> <b> We Intend to change this to the list of available Jobs later </b> </pre>
+    <p v-if="error" role="alert">{{ error }}</p>
+    <div v-for="client in clients" :key="client.id">
+      <p>Client name: {{ client.name }}</p>
+      <p>Client schema: {{ client.schema_name }}</p>
+      <p>Client API Endpoints: <a :href="tenantUrl(client, '/docs/')">{{ tenantUrl(client, '/docs/') }}</a></p>
+      <p>Admin URL: <a :href="tenantUrl(client)">{{ tenantUrl(client) }}</a></p>
+      <p>Admin Username: {{ client.schema_name }}</p>
+      <p>Admin Default Password: Ask the tenant you're on for this</p>
+      <p>Client API Endpoints: <a :href="tenantUrl(client, '/jobs/')">{{ tenantUrl(client, '/jobs/') }}</a></p>
+      <hr>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
 export default {
+  name: 'TenantList',
   data() {
-    return {
-      // note: changing this line won't causes changes
-      // with hot-reload because the reloaded component
-      // preserves its current state and we are modifying
-      // its initial state.
-      hostname: location.host,
-      clients: null
+    return { clients: [], error: '' };
+  },
+  async mounted() {
+    try {
+      const response = await fetch('/api/clients/');
+      if (!response.ok) throw new Error('Tenants request failed');
+      this.clients = await response.json();
+    } catch {
+      this.error = 'Unable to load the tenant list.';
     }
   },
-  mounted(){
-    let url = `http://${this.hostname}/api/clients/`
-    fetch(url)
-    .then((resp) => resp.json()) // Transform the data into json
-    .then((data) => this.clients = data
-    )
-  }
-}
+  methods: {
+    tenantUrl(client, path = '') {
+      return `${location.protocol}//${client.domain_url}${path}`;
+    },
+  },
+};
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>

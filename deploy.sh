@@ -1,27 +1,8 @@
-echo 'Run npm build'
+#!/usr/bin/env sh
+set -eu
+python -m pip install -r requirements.txt
+npm ci
 npm run build
-echo 'Done...'
-
-echo 'Format index.html as Jinja template'
-python format_index_html.py
-echo 'Done...'
-
-echo 'Install python modules'
-pip install -r requirements.txt
-echo 'Done...'
-
-echo 'Install Django Admin Theme'
-python manage.py loaddata admin_interface_theme_django.json
-echo 'Done...'
-
-echo 'Collect static'
 python manage.py collectstatic --noinput
-echo 'Done...'
-
-echo 'Run migrations'
-python manage.py migrate_schemas --shared
-echo 'Done...'
-
-export PORT=8000
-echo 'Server runnning on port ' $PORT
-python manage.py runserver
+python manage.py migrate_schemas --noinput
+exec gunicorn vuedj.wsgi:application --bind "0.0.0.0:${PORT:-8000}" --access-logfile -
